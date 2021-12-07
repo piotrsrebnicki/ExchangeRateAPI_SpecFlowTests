@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ax/1XVv4RVxRGGh9HbrJ1YGuG2yNF3lupc+QV6uUi0zzYUgTIjZJnThGKzHGhH/pEzE0NVf6m8rdDZaVEhAbAw==",
+  "dgSpecHash": "p5373q2gmNowVUIWkzH0bIhpfMMPKoEdeKqNfOaTahBwxInvgELuBQ4x1SM2UPdHW/9wZjrn1LQCUUra524Z7Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PLPISRE\\Documents\\private\\stonex\\drugie podejscie\\ExchangeRates\\ExchangeRates\\ExchangeRates.csproj",
+  "projectFilePath": "C:\\Users\\PLPISRE\\Documents\\private\\GitHub\\ExchangeRateAPI_SpecFlowTests\\ExchangeRates\\ExchangeRates\\ExchangeRates.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PLPISRE\\.nuget\\packages\\bodi\\1.5.0\\bodi.1.5.0.nupkg.sha512",
     "C:\\Users\\PLPISRE\\.nuget\\packages\\cucumber.messages\\6.0.1\\cucumber.messages.6.0.1.nupkg.sha512",

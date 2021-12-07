@@ -4,7 +4,6 @@ using FluentAssertions.Execution;
 using RestSharp;
 using RestSharp.Serialization.Json;
 using System;
-using System.Collections.Generic;
 using TechTalk.SpecFlow;
 
 namespace ExchangeRates.Steps
@@ -87,14 +86,6 @@ namespace ExchangeRates.Steps
             var expectedResultInfo = "error";
             var expectedDocUrl = "https://www.exchangerate-api.com/docs";
             var expectedTermsOfUseUrl = "https://www.exchangerate-api.com/terms";
-            var errorTypes = new List<string>
-                {
-                    "unsupported-code",
-                    "malformed-request",
-                    "invalid-key",
-                    "inactive-account",
-                    "quota-reached"
-                };
 
             ErrorResponse errorResponse = new JsonDeserializer().Deserialize<ErrorResponse>(RestResponse);
 
@@ -103,7 +94,7 @@ namespace ExchangeRates.Steps
                 errorResponse.Result.Should().Be(expectedResultInfo);
                 errorResponse.Documentation.Should().Be(expectedDocUrl);
                 errorResponse.TermsOfUse.Should().Be(expectedTermsOfUseUrl);
-                errorResponse.ErrorType.Should().ContainAny(errorTypes);
+                errorResponse.ErrorType.Should().ContainAny(ErrorTypes.errorTypes);
             }
         }
     }

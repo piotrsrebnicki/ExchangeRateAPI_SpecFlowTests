@@ -19,7 +19,7 @@ namespace ExchangeRates.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Get latest exchange rates", Description="\tEndpoint used to return the latest currency rates", SourceFile="Features\\Latest.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Get latest exchange rates", Description="\tEndpoint used to return the latest currency rates", SourceFile="Features\\LatestExchangeRates.feature", SourceLine=0)]
     public partial class GetLatestExchangeRatesFeature
     {
         
@@ -27,7 +27,7 @@ namespace ExchangeRates.Features
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "Latest.feature"
+#line 1 "LatestExchangeRates.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]

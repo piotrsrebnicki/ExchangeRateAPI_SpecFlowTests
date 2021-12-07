@@ -28,7 +28,16 @@ namespace ExchangeRates.Steps
             RestResponse = RestClient.Execute(RestRequest);
         }
 
-        [Then]
+        [When(@"the user sends request without API Key")]
+        public void WhenTheUserSendsRequestWithoutAPIKey()
+        {
+            RestClient = new RestClient(BaseUrl);
+            RestRequest = new RestRequest(EndpointSupportedCodes, Method.GET);
+
+            RestResponse = RestClient.Execute(RestRequest);
+        }
+
+        [Then(@"the result should be success")]
         public void ThenTheResultShouldBeSuccess()
         {
             var expectedResultInfo = "success";
@@ -43,6 +52,24 @@ namespace ExchangeRates.Steps
                 supportedCodesResponse.SupportedCodes.Should().BeOfType<List<List<string>>>();
                 supportedCodesResponse.Documentation.Should().Be(expectedDocUrl);
                 supportedCodesResponse.TermsOfUse.Should().Be(expectedTermsOfUseUrl);
+            }
+        }
+
+        [Then(@"the Supported Codes response should be error")]
+        public void ThenTheSupportedCodesResponseShouldBeError()
+        {
+            var expectedResultInfo = "error";
+            var expectedDocUrl = "https://www.exchangerate-api.com/docs";
+            var expectedTermsOfUseUrl = "https://www.exchangerate-api.com/terms";
+
+            ErrorResponse errorResponse = new JsonDeserializer().Deserialize<ErrorResponse>(RestResponse);
+
+            using (new AssertionScope())
+            {
+                errorResponse.Result.Should().Be(expectedResultInfo);
+                errorResponse.Documentation.Should().Be(expectedDocUrl);
+                errorResponse.TermsOfUse.Should().Be(expectedTermsOfUseUrl);
+                errorResponse.ErrorType.Should().ContainAny(ErrorTypes.errorTypes);
             }
         }
     }

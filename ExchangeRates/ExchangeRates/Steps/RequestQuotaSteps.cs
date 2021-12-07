@@ -18,7 +18,7 @@ namespace ExchangeRates.Steps
         private const string BaseUrl = "https://v6.exchangerate-api.com/v6";
         private const string EndpointRequestQuota = "/quota";
 
-        [When]
+        [When(@"the user sends request to Quota API")]
         public void WhenTheUserSendsRequestToQuotaAPI()
         {
             RestClient = new RestClient(BaseUrl);
@@ -27,7 +27,16 @@ namespace ExchangeRates.Steps
             RestResponse = RestClient.Execute(RestRequest);
         }
 
-        [Then]
+        [When(@"the user sends quota request without API Key")]
+        public void WhenTheUserSendsQuotaRequestWithoutAPIKey()
+        {
+            RestClient = new RestClient(BaseUrl);
+            RestRequest = new RestRequest(EndpointRequestQuota, Method.GET);
+
+            RestResponse = RestClient.Execute(RestRequest);
+        }
+
+        [Then(@"the result should contain required information")]
         public void ThenTheResultShouldContainRequiredInformation()
         {
             var expectedResultInfo = "success";
@@ -46,6 +55,24 @@ namespace ExchangeRates.Steps
                 requestQuotaResponse.PlanQuota.Should().Be(expectedPlanQuota);
                 requestQuotaResponse.RefreshDayOfMonth.Should().Be(expectedRefreshDayOfMonth);
                 requestQuotaResponse.RequestsRemaining.Should().BeInRange(0, expectedPlanQuota);
+            }
+        }
+
+        [Then(@"the request quota response should be error")]
+        public void ThenTheRequestQuotaResponseShouldBeError()
+        {
+            var expectedResultInfo = "error";
+            var expectedDocUrl = "https://www.exchangerate-api.com/docs";
+            var expectedTermsOfUseUrl = "https://www.exchangerate-api.com/terms";
+
+            ErrorResponse errorResponse = new JsonDeserializer().Deserialize<ErrorResponse>(RestResponse);
+
+            using (new AssertionScope())
+            {
+                errorResponse.Result.Should().Be(expectedResultInfo);
+                errorResponse.Documentation.Should().Be(expectedDocUrl);
+                errorResponse.TermsOfUse.Should().Be(expectedTermsOfUseUrl);
+                errorResponse.ErrorType.Should().ContainAny(ErrorTypes.errorTypes);
             }
         }
     }

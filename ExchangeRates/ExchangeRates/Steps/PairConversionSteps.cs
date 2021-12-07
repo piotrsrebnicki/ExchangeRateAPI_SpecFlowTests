@@ -3,7 +3,6 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using RestSharp;
 using RestSharp.Serialization.Json;
-using System;
 using TechTalk.SpecFlow;
 
 namespace ExchangeRates.Steps
@@ -70,6 +69,17 @@ namespace ExchangeRates.Steps
             RestResponse = RestClient.Execute(RestRequest);
         }
 
+        [When(@"the user sends the request for pair conversion without API Key")]
+        public void WhenTheUserSendsTheRequestForPairConversionWithoutAPIKey()
+        {
+            var firstCurrency = _scenarioContext.Get<string>("firstCurrency");
+            var secondCurrency = _scenarioContext.Get<string>("secondCurrency");
+
+            RestClient = new RestClient(BaseUrl);
+            RestRequest = new RestRequest(EndpointPairConversion + firstCurrency + "/" + secondCurrency, Method.GET);
+
+            RestResponse = RestClient.Execute(RestRequest);
+        }
 
         [Then(@"the response should be success")]
         public void ThenTheResponseShouldBeSuccess()
@@ -91,5 +101,24 @@ namespace ExchangeRates.Steps
                 pairConversionRatesResponse.TermsOfUse.Should().Be(expectedTermsOfUseUrl);
             }
         }
+
+        [Then(@"the pair conversion response should be error")]
+        public void ThenThePairConversionResponseShouldBeError()
+        {
+            var expectedResultInfo = "error";
+            var expectedDocUrl = "https://www.exchangerate-api.com/docs";
+            var expectedTermsOfUseUrl = "https://www.exchangerate-api.com/terms";
+
+            ErrorResponse errorResponse = new JsonDeserializer().Deserialize<ErrorResponse>(RestResponse);
+
+            using (new AssertionScope())
+            {
+                errorResponse.Result.Should().Be(expectedResultInfo);
+                errorResponse.Documentation.Should().Be(expectedDocUrl);
+                errorResponse.TermsOfUse.Should().Be(expectedTermsOfUseUrl);
+                errorResponse.ErrorType.Should().ContainAny(ErrorTypes.errorTypes);
+            }
+        }
+
     }
 }

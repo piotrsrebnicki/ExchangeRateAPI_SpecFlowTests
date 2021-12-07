@@ -6657,11 +6657,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PLPISRE\\Documents\\private\\stonex\\drugie podejscie\\ExchangeRates\\ExchangeRates\\ExchangeRates.csproj",
+      "projectUniqueName": "C:\\Users\\PLPISRE\\Documents\\private\\GitHub\\ExchangeRateAPI_SpecFlowTests\\ExchangeRates\\ExchangeRates\\ExchangeRates.csproj",
       "projectName": "ExchangeRates",
-      "projectPath": "C:\\Users\\PLPISRE\\Documents\\private\\stonex\\drugie podejscie\\ExchangeRates\\ExchangeRates\\ExchangeRates.csproj",
+      "projectPath": "C:\\Users\\PLPISRE\\Documents\\private\\GitHub\\ExchangeRateAPI_SpecFlowTests\\ExchangeRates\\ExchangeRates\\ExchangeRates.csproj",
       "packagesPath": "C:\\Users\\PLPISRE\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PLPISRE\\Documents\\private\\stonex\\drugie podejscie\\ExchangeRates\\ExchangeRates\\obj\\",
+      "outputPath": "C:\\Users\\PLPISRE\\Documents\\private\\GitHub\\ExchangeRateAPI_SpecFlowTests\\ExchangeRates\\ExchangeRates\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PLPISRE\\AppData\\Roaming\\NuGet\\NuGet.Config",
